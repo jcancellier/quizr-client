@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const AppHeader = () => {
   return (
-    <AppBar position="static" color='inherit'>
+    <AppBar position="static" color='primary'>
       <Toolbar>
         <HeaderText variant="h4">Quizr</HeaderText>
         <Button color="inherit">Create Quiz</Button>
