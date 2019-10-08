@@ -1,1 +1,1 @@
-View current build here: https://jcancellier.github.io/quizr-client/
+Current release: https://jcancellier.github.io/quizr-client/
