@@ -10,15 +10,18 @@ const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
 `;
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppHeader />
+      <AppContainer>
+        <AppHeader />
+        <HomePage />
+      </AppContainer>
     </ThemeProvider>
   );
 }
