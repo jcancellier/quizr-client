@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/quizr-client/static/js/main.b262e710.chunk.js",
-    "main.js.map": "/quizr-client/static/js/main.b262e710.chunk.js.map",
+    "main.js": "/quizr-client/static/js/main.dde23b2d.chunk.js",
+    "main.js.map": "/quizr-client/static/js/main.dde23b2d.chunk.js.map",
     "runtime-main.js": "/quizr-client/static/js/runtime-main.6e18906d.js",
     "runtime-main.js.map": "/quizr-client/static/js/runtime-main.6e18906d.js.map",
-    "static/js/2.3625ac4c.chunk.js": "/quizr-client/static/js/2.3625ac4c.chunk.js",
-    "static/js/2.3625ac4c.chunk.js.map": "/quizr-client/static/js/2.3625ac4c.chunk.js.map",
+    "static/js/2.3651fdae.chunk.js": "/quizr-client/static/js/2.3651fdae.chunk.js",
+    "static/js/2.3651fdae.chunk.js.map": "/quizr-client/static/js/2.3651fdae.chunk.js.map",
     "index.html": "/quizr-client/index.html",
-    "precache-manifest.5046cefda1bc2eca3886b2e8b70bb733.js": "/quizr-client/precache-manifest.5046cefda1bc2eca3886b2e8b70bb733.js",
+    "precache-manifest.af03f53eeed7a3774dc600813bc097d5.js": "/quizr-client/precache-manifest.af03f53eeed7a3774dc600813bc097d5.js",
     "service-worker.js": "/quizr-client/service-worker.js"
   },
   "entrypoints": [
     "static/js/runtime-main.6e18906d.js",
-    "static/js/2.3625ac4c.chunk.js",
-    "static/js/main.b262e710.chunk.js"
+    "static/js/2.3651fdae.chunk.js",
+    "static/js/main.dde23b2d.chunk.js"
   ]
 }
