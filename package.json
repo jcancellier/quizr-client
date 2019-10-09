@@ -9,6 +9,7 @@
     "@material-ui/styles": "^4.5.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-material-ui-form-validator": "^2.0.9",
     "react-scripts": "3.2.0",
     "styled-components": "^4.4.0"
   },

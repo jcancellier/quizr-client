@@ -12,13 +12,22 @@ import {
   Divider
 } from './style';
 
+const minUsernameInputTextLength = 1;
+
 class HomePage extends Component {
   state = {
-    usernameInputText: ''
+    usernameInputText: '',
+    usernameInputTextDisable: true
   }
 
   handleUsernameInputTextChange = (e) => {
-    this.setState({ usernameInputText: e.target.value })
+    this.setState({ usernameInputText: e.target.value }, () => {
+      // Validate minimum usernameInputText length
+      if (this.state.usernameInputText.length >= minUsernameInputTextLength)
+        this.setState({ usernameInputTextDisable: false });
+      else 
+        this.setState({ usernameInputTextDisable: true });
+    })
   }
 
   render() {
@@ -48,6 +57,7 @@ class HomePage extends Component {
               variant='contained'
               color='primary'
               endIcon={ <Person /> }
+              disabled={this.state.usernameInputTextDisable}
           >
             Join
           </Button>
