@@ -8,7 +8,7 @@ import { Person } from '@material-ui/icons';
 import {
   HomePageContainer,
   AuthFormTextContainer,
-  AuthFormContainer,
+  AuthForm,
   Divider
 } from './style';
 
@@ -30,10 +30,16 @@ class HomePage extends Component {
     })
   }
 
+  handleSubmitAuthenticationForm = (e) => {
+    e.preventDefault();
+    console.log('hello world')
+    // alert('submitted');
+  }
+
   render() {
     return (
       <HomePageContainer>
-        <AuthFormContainer>
+        <AuthForm onSubmit={this.handleSubmitAuthenticationForm}>
           <AuthFormTextContainer>
             <TextField
               id='username-input'
@@ -58,10 +64,11 @@ class HomePage extends Component {
               color='primary'
               endIcon={ <Person /> }
               disabled={this.state.usernameInputTextDisable}
+              onClick={this.handleSubmitAuthenticationForm}
           >
             Join
           </Button>
-        </AuthFormContainer>
+        </AuthForm>
       </HomePageContainer>
     )
   }

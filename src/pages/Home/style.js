@@ -17,11 +17,10 @@ export const AuthFormTextContainer = styled.div`
   }
 `;
 
-export const AuthFormContainer = styled.div`
+export const AuthForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
 `;
 
 export const Divider = styled.div`
