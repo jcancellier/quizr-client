@@ -25,4 +25,8 @@ export const AuthForm = styled.form`
 
 export const Divider = styled.div`
   width: 0.5rem;
+
+  @media (max-width: 768px) {
+    height: 0.7rem;
+  }
 `;

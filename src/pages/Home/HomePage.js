@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { 
-  TextField, 
-  Button, 
+import {
+  TextField,
+  Button,
   Typography
 } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
@@ -13,25 +13,41 @@ import {
 } from './style';
 
 const minUsernameInputTextLength = 1;
+const minPasswordInputTextLength = 1;
 
 class HomePage extends Component {
   state = {
     usernameInputText: '',
-    usernameInputTextDisable: true
+    passwordInputText: '',
+    submitAuthenticationFormDisable: true
   }
 
   handleUsernameInputTextChange = (e) => {
     this.setState({ usernameInputText: e.target.value }, () => {
-      // Validate minimum usernameInputText length
-      if (this.state.usernameInputText.length >= minUsernameInputTextLength)
-        this.setState({ usernameInputTextDisable: false });
-      else 
-        this.setState({ usernameInputTextDisable: true });
+      this.validateFormFields();
     })
+  }
+
+  handlePasswordInputTextChange = (e) => {
+    this.setState({ passwordInputText: e.target.value }, () => {
+      this.validateFormFields();
+    })
+  }
+
+  validateFormFields = () => {
+    if (
+      this.state.usernameInputText.length >= minUsernameInputTextLength &&
+      this.state.passwordInputText.length >= minPasswordInputTextLength
+    ) {
+      this.setState({ submitAuthenticationFormDisable: false });
+    } else {
+      this.setState({ submitAuthenticationFormDisable: true });
+    }
   }
 
   handleSubmitAuthenticationForm = (e) => {
     e.preventDefault();
+    alert('Welcome');
   }
 
   render() {
@@ -47,22 +63,23 @@ class HomePage extends Component {
               variant='outlined'
             />
             {/* Use the components below if password will be utilized */}
-            {/* <Divider/>
+            <Divider />
             <TextField
               id='password-input'
               label='Password'
-              value={this.state.usernameInputText}
-              onChange={e => this.handleUsernameInputTextChange(e)}
-              variant='filled'
+              value={this.state.passwordInputText}
+              onChange={e => this.handlePasswordInputTextChange(e)}
+              variant='outlined'
               type="password"
-            /> */}
+            />
           </AuthFormTextContainer>
           <Button
-              variant='contained'
-              color='primary'
-              endIcon={ <Person /> }
-              disabled={this.state.usernameInputTextDisable}
-              onClick={this.handleSubmitAuthenticationForm}
+            variant='contained'
+            color='primary'
+            endIcon={<Person />}
+            disabled={this.state.submitAuthenticationFormDisable}
+            onClick={this.handleSubmitAuthenticationForm}
+            type="submit"
           >
             Join
           </Button>
