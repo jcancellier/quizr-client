@@ -32,8 +32,6 @@ class HomePage extends Component {
 
   handleSubmitAuthenticationForm = (e) => {
     e.preventDefault();
-    console.log('hello world')
-    // alert('submitted');
   }
 
   render() {
