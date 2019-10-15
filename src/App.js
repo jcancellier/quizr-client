@@ -3,15 +3,12 @@ import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 import theme from './global/styles/theme';
 import styled from 'styled-components';
-import { HomePage } from './pages';
-import { AppHeader } from './global/components';
+import { Router } from './routing';
 
 const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
 `;
 
 function App() {
@@ -19,8 +16,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppContainer>
-        <AppHeader />
-        <HomePage />
+        <Router />
       </AppContainer>
     </ThemeProvider>
   );
