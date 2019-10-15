@@ -9,6 +9,7 @@ const ProtectedRoute = (props) => {
         if (isLoggedIn) {
             return props.children
         } else {
+            alert('must be admin to access');
             return <Redirect to="/"/>
         }
     }

@@ -8,7 +8,7 @@ const Router = (props) => {
     <HashRouter basename="/">
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/joinquiz" component={JoinQuizPage} />
+        <ProtectedRoute path="/joinquiz" component={JoinQuizPage} />
         <Redirect to="/" />
       </Switch>
     </HashRouter>
