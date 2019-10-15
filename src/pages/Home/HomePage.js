@@ -53,7 +53,8 @@ class HomePage extends Component {
 
   handleSubmitAuthenticationForm = (e) => {
     e.preventDefault();
-    alert('Welcome');
+    // alert('Welcome');
+    this.props.history.push('/joinquiz');
   }
 
   render() {
