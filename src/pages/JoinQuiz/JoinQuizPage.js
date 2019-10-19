@@ -5,7 +5,7 @@ class JoinQuizPage extends Component {
     render() {
         return (
             <div>
-                <AppHeader />
+                <AppHeader buttons={false}/>
                 <h1>Join Quiz Page</h1>
             </div>
         )

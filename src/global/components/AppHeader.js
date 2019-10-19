@@ -5,15 +5,21 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 
-const AppHeader = () => {
+
+
+const AppHeader = (props) => {
   return (
     <AppBar position="static" color='primary'>
       <Toolbar>
         <HeaderText variant="h4">Quizr</HeaderText>
-        <Button color="inherit">Create Quiz</Button>
+        { props.buttons && <Button color="inherit">Create Quiz</Button>}
       </Toolbar>
     </AppBar>
   );
+}
+
+AppHeader.defaultProps = {
+  buttons: true
 }
 
 // styles
