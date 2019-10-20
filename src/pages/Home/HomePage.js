@@ -11,7 +11,7 @@ import {
   HomePageContainer,
   AuthFormTextContainer,
   AuthForm,
-  Divider
+  // Divider
 } from './style';
 
 import {
@@ -19,12 +19,12 @@ import {
 } from '../../global/components';
 
 const minUsernameInputTextLength = 1;
-const minPasswordInputTextLength = 1;
+// const minPasswordInputTextLength = 1;
 
 class HomePage extends Component {
   state = {
     usernameInputText: '',
-    passwordInputText: '',
+    // passwordInputText: '',
     submitAuthenticationFormDisable: true
   }
 
@@ -34,16 +34,16 @@ class HomePage extends Component {
     })
   }
 
-  handlePasswordInputTextChange = (e) => {
-    this.setState({ passwordInputText: e.target.value }, () => {
-      this.validateFormFields();
-    })
-  }
+  // handlePasswordInputTextChange = (e) => {
+  //   this.setState({ passwordInputText: e.target.value }, () => {
+  //     this.validateFormFields();
+  //   })
+  // }
 
   validateFormFields = () => {
     if (
-      this.state.usernameInputText.length >= minUsernameInputTextLength &&
-      this.state.passwordInputText.length >= minPasswordInputTextLength
+      this.state.usernameInputText.length >= minUsernameInputTextLength 
+      // && this.state.passwordInputText.length >= minPasswordInputTextLength
     ) {
       this.setState({ submitAuthenticationFormDisable: false });
     } else {
@@ -72,7 +72,7 @@ class HomePage extends Component {
                 onChange={e => this.handleUsernameInputTextChange(e)}
                 variant='outlined'
               />
-              <Divider />
+              {/* <Divider />
               <TextField
                 id='password-input'
                 label='Password'
@@ -80,7 +80,7 @@ class HomePage extends Component {
                 onChange={e => this.handlePasswordInputTextChange(e)}
                 variant='outlined'
                 type="password"
-              />
+              /> */}
             </AuthFormTextContainer>
             <Button
               variant='contained'
