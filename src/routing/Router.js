@@ -1,6 +1,6 @@
 import React from 'react';
 import { HomePage, JoinQuizPage } from '../pages';
-import { BrowserRouter, Route, Switch, Redirect, HashRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import { ProtectedRoute } from '.';
 
 const Router = (props) => {

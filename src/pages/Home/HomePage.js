@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { Person } from '@material-ui/icons';
 import {
   TextField,
   Button,
-  LinearProgress
+  // LinearProgress
 } from '@material-ui/core';
 
 import {
@@ -18,6 +17,9 @@ import {
   AppHeader
 } from '../../global/components';
 
+import * as signalR from '@microsoft/signalr';
+import { quizrHubDevelopmentUrl } from '../../api/hub';
+
 const minUsernameInputTextLength = 1;
 // const minPasswordInputTextLength = 1;
 
@@ -26,6 +28,20 @@ class HomePage extends Component {
     usernameInputText: '',
     // passwordInputText: '',
     submitAuthenticationFormDisable: true
+  }
+
+  componentDidMount() {
+    let connection = new signalR.HubConnectionBuilder()
+    .withUrl(quizrHubDevelopmentUrl)
+    .build();
+
+    connection.start()
+      .then(() => {
+        alert('granted')
+      })
+      .catch((err) => {
+        alert(err);
+      })
   }
 
   handleUsernameInputTextChange = (e) => {
