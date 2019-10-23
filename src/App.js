@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setHubConnection } from './redux/actions/ServerActions';
-import { quizrHubDevelopmentUrl } from './api/hub';
+import { quizrHubProductionUrl } from './api/hub';
 import * as signalR from '@microsoft/signalr';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
@@ -18,7 +18,7 @@ const AppContainer = styled.div`
 function App(props) {
   useEffect(() => {
     let connection = new signalR.HubConnectionBuilder()
-      .withUrl(quizrHubDevelopmentUrl)
+      .withUrl(quizrHubProductionUrl)
       .build();
 
     connection.start()
