@@ -1,26 +1,35 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-let isLoggedIn = true;
 
-const ProtectedRoute = (props) => {
+const ProtectedRouteComponent = (props) => {
 
   const renderPageOrRedirect = () => {
-    if (isLoggedIn) {
-      return props.children
+    if (props.isLoggedIn) {
+      return <props.component />
     } else {
-      alert('must be admin to access');
       return <Redirect to="/" />
     }
   }
 
+  const {component, ...other} = props;
+
   return (
-    <Route {...props}>
+    <Route {...other}>
       {
         renderPageOrRedirect()
       }
     </Route>
   )
 }
+
+const mapStateStateToProps = (state) => {
+  return {
+    isLoggedIn: state.auth.isLoggedIn
+  }
+}
+
+const ProtectedRoute = connect(mapStateStateToProps)(ProtectedRouteComponent)
 
 export { ProtectedRoute };

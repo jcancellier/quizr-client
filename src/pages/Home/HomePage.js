@@ -5,43 +5,27 @@ import {
   Button,
   // LinearProgress
 } from '@material-ui/core';
-
 import {
   HomePageContainer,
   AuthFormTextContainer,
   AuthForm,
   // Divider
 } from './style';
-
 import {
   AppHeader
 } from '../../global/components';
-
-import * as signalR from '@microsoft/signalr';
-import { quizrHubDevelopmentUrl } from '../../api/hub';
+import { connect } from 'react-redux';
+import { setIsLoggedIn, setUser } from '../../redux/actions/AuthActions';
 
 const minUsernameInputTextLength = 1;
 // const minPasswordInputTextLength = 1;
 
-class HomePage extends Component {
+class Home extends Component {
   state = {
     usernameInputText: '',
     // passwordInputText: '',
-    submitAuthenticationFormDisable: true
-  }
-
-  componentDidMount() {
-    let connection = new signalR.HubConnectionBuilder()
-    .withUrl(quizrHubDevelopmentUrl)
-    .build();
-
-    connection.start()
-      .then(() => {
-        alert('granted')
-      })
-      .catch((err) => {
-        alert(err);
-      })
+    submitAuthenticationFormDisable: true,
+    submitAuthenticationFormError: false
   }
 
   handleUsernameInputTextChange = (e) => {
@@ -58,7 +42,7 @@ class HomePage extends Component {
 
   validateFormFields = () => {
     if (
-      this.state.usernameInputText.length >= minUsernameInputTextLength 
+      this.state.usernameInputText.length >= minUsernameInputTextLength
       // && this.state.passwordInputText.length >= minPasswordInputTextLength
     ) {
       this.setState({ submitAuthenticationFormDisable: false });
@@ -69,8 +53,19 @@ class HomePage extends Component {
 
   handleSubmitAuthenticationForm = (e) => {
     e.preventDefault();
-    // alert('Welcome');
-    this.props.history.push('/joinquiz');
+
+    // Login
+    this.props.connection.invoke("Login", this.state.usernameInputText)
+      .then(user => {
+        console.info(`Logged in as user ${user}`);
+        this.props.setIsLoggedIn(true);
+        this.props.setUser(user);
+        this.props.history.push('/joinquiz');
+      })
+      .catch(err => {
+        console.log(err.toString())
+        this.setState({ submitAuthenticationFormError: true })
+      });
   }
 
   render() {
@@ -87,6 +82,8 @@ class HomePage extends Component {
                 value={this.state.usernameInputText}
                 onChange={e => this.handleUsernameInputTextChange(e)}
                 variant='outlined'
+                error={this.state.submitAuthenticationFormError}
+                helperText={this.state.submitAuthenticationFormError ? 'Username already being used' : null}
               />
               {/* <Divider />
               <TextField
@@ -115,4 +112,17 @@ class HomePage extends Component {
   }
 }
 
-export { HomePage };
+const mapStateToProps = (state) => {
+  return {
+    connection: state.server.hubConnection
+  }
+}
+
+const HomePage = connect(mapStateToProps, {
+  setIsLoggedIn,
+  setUser
+})(Home);
+
+export {
+  HomePage
+};

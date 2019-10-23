@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setHubConnection } from './redux/actions/ServerActions';
+import { quizrHubDevelopmentUrl } from './api/hub';
+import * as signalR from '@microsoft/signalr';
 import { ThemeProvider } from '@material-ui/styles';
-import { Provider } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
 import theme from './global/styles/theme';
 import styled from 'styled-components';
 import { Router } from './routing';
-import store from './redux/store';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -13,17 +15,32 @@ const AppContainer = styled.div`
   flex-direction: column;
 `;
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    let connection = new signalR.HubConnectionBuilder()
+      .withUrl(quizrHubDevelopmentUrl)
+      .build();
+
+    connection.start()
+      .then(() => {
+        alert('granted')
+        props.setHubConnection(connection);
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  });
+
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppContainer>
-          <Router />
-        </AppContainer>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppContainer>
+        <Router />
+      </AppContainer>
+    </ThemeProvider>
   );
 }
 
-export default App;
+export default connect(null,{
+  setHubConnection
+})(App);
