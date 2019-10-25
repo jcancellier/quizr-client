@@ -18,7 +18,8 @@ const AppContainer = styled.div`
 
 class App extends Component {
   state = {
-    isHubConnectionLoading: false
+    isHubConnectionLoading: false,
+    errorLoadingHubConnection: false
   }
 
   setIsHubConnectionLoading = (loading) => {
@@ -44,11 +45,15 @@ class App extends Component {
       .catch((err) => {
         alert(err);
         this.setIsHubConnectionLoading(false);
+        this.setState({ errorLoadingHubConnection: true });
       })
   }
 
   determineLoadingOverlayText = () => {
-    if (this.state.isHubConnectionLoading) {
+    if (this.state.errorLoadingHubConnection) {
+      return "Error connecting to server. Please refresh page to try again!"
+    }
+    else if (this.state.isHubConnectionLoading) {
       return ""
     }
     else if (this.props.isLoggingIn)
@@ -58,9 +63,27 @@ class App extends Component {
   }
 
   render() {
+    console.log(`${theme.palette.primary[theme.palette.type]}`)
     return (
       <ThemeProvider theme={theme}>
-        <LoadingOverlay active={this.state.isHubConnectionLoading || this.props.isLoggingIn} spinner fadeSpeed={0} text={this.determineLoadingOverlayText()}>
+        <LoadingOverlay
+          active={this.state.isHubConnectionLoading || this.props.isLoggingIn || this.state.errorLoadingHubConnection}
+          spinner={!this.state.errorLoadingHubConnection}
+          fadeSpeed={0}
+          text={this.determineLoadingOverlayText()}
+          styles={{
+            spinner: (base) => ({
+              ...base,
+              '& svg circle': {
+                stroke: `${theme.palette.primary[theme.palette.type]}`
+              }
+            }),
+            content: (base) => ({
+              ...base,
+              fontFamily: theme.typography.fontFamily
+            })
+          }}
+        >
           <CssBaseline />
           <AppContainer>
             <Router />
