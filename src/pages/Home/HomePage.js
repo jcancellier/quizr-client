@@ -9,21 +9,22 @@ import {
   HomePageContainer,
   AuthFormTextContainer,
   AuthForm,
-  // Divider
+  Header,
+  Footer,
+  Divider
 } from './style';
 import {
   AppHeader
 } from '../../global/components';
 import { connect } from 'react-redux';
-import { setIsLoggedIn, setUser } from '../../redux/actions/AuthActions';
+import { setIsLoggedIn, setUser, setIsLoggingIn } from '../../redux/actions/AuthActions';
+import { joinquizRoutePath } from '../../routing';
 
 const minUsernameInputTextLength = 1;
-// const minPasswordInputTextLength = 1;
 
 class Home extends Component {
   state = {
     usernameInputText: '',
-    // passwordInputText: '',
     submitAuthenticationFormDisable: true,
     submitAuthenticationFormError: false
   }
@@ -34,17 +35,24 @@ class Home extends Component {
     })
   }
 
-  // handlePasswordInputTextChange = (e) => {
-  //   this.setState({ passwordInputText: e.target.value }, () => {
-  //     this.validateFormFields();
-  //   })
-  // }
+  renderConnectButton = () => {
+    const { isLoggedIn } = this.props;
+    return (
+      <Button
+        variant='contained'
+        color='primary'
+        endIcon={<Person />}
+        disabled={isLoggedIn ? false : this.state.submitAuthenticationFormDisable}
+        onClick={this.handleSubmitAuthenticationForm}
+        type="submit"
+      >
+        {this.props.isLoggedIn ? "Reconnect" : "Login"}
+      </Button>
+    )
+  }
 
   validateFormFields = () => {
-    if (
-      this.state.usernameInputText.length >= minUsernameInputTextLength
-      // && this.state.passwordInputText.length >= minPasswordInputTextLength
-    ) {
+    if (this.state.usernameInputText.length >= minUsernameInputTextLength) {
       this.setState({ submitAuthenticationFormDisable: false });
     } else {
       this.setState({ submitAuthenticationFormDisable: true });
@@ -54,15 +62,24 @@ class Home extends Component {
   handleSubmitAuthenticationForm = (e) => {
     e.preventDefault();
 
+    // If logged in just navigate user to join quiz page
+    if (this.props.isLoggedIn) {
+      this.props.history.push(joinquizRoutePath);
+      return;
+    }
+
+    this.props.setIsLoggingIn(true);
     // Login
     this.props.connection.invoke("Login", this.state.usernameInputText)
       .then(user => {
+        this.props.setIsLoggingIn(false);
         console.info(`Logged in as user ${user}`);
         this.props.setIsLoggedIn(true);
         this.props.setUser(user);
-        this.props.history.push('/joinquiz');
+        this.props.history.push(joinquizRoutePath);
       })
       .catch(err => {
+        this.props.setIsLoggingIn(false);
         console.log(err.toString())
         this.setState({ submitAuthenticationFormError: true })
       });
@@ -74,9 +91,13 @@ class Home extends Component {
         <AppHeader />
         {/* <LinearProgress/> */}
         <HomePageContainer>
+          <Header>
+            {/* Welcome back,
+            jcancellier! */}
+          </Header>
           <AuthForm onSubmit={this.handleSubmitAuthenticationForm}>
             <AuthFormTextContainer>
-              <TextField
+              {!this.props.isLoggedIn && <TextField
                 id='username-input'
                 label='Username'
                 value={this.state.usernameInputText}
@@ -84,28 +105,12 @@ class Home extends Component {
                 variant='outlined'
                 error={this.state.submitAuthenticationFormError}
                 helperText={this.state.submitAuthenticationFormError ? 'Username already being used' : null}
-              />
-              {/* <Divider />
-              <TextField
-                id='password-input'
-                label='Password'
-                value={this.state.passwordInputText}
-                onChange={e => this.handlePasswordInputTextChange(e)}
-                variant='outlined'
-                type="password"
-              /> */}
+              />}
+              <Divider />
+              {this.renderConnectButton()}
             </AuthFormTextContainer>
-            <Button
-              variant='contained'
-              color='primary'
-              endIcon={<Person />}
-              disabled={this.state.submitAuthenticationFormDisable}
-              onClick={this.handleSubmitAuthenticationForm}
-              type="submit"
-            >
-              Connect
-          </Button>
           </AuthForm>
+          <Footer />
         </HomePageContainer>
       </Fragment>
     )
@@ -114,13 +119,15 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    connection: state.server.hubConnection
+    connection: state.server.hubConnection,
+    isLoggedIn: state.auth.isLoggedIn
   }
 }
 
 const HomePage = connect(mapStateToProps, {
   setIsLoggedIn,
-  setUser
+  setUser,
+  setIsLoggingIn
 })(Home);
 
 export {
