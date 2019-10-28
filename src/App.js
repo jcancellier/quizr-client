@@ -30,7 +30,7 @@ class App extends Component {
     this.setIsHubConnectionLoading(true);
 
     let connection = new signalR.HubConnectionBuilder()
-      .withUrl(quizrHubDevelopmentMacUrl, signalR.HttpTransportType.WebSockets)
+      .withUrl(quizrHubProductionUrl, signalR.HttpTransportType.WebSockets)
       .withAutomaticReconnect()
       .build();
 
