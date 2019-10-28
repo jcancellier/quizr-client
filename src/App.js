@@ -30,7 +30,7 @@ class App extends Component {
     this.setIsHubConnectionLoading(true);
 
     let connection = new signalR.HubConnectionBuilder()
-      .withUrl(quizrHubProductionUrl, signalR.HttpTransportType.WebSockets)
+      .withUrl(quizrHubDevelopmentMacUrl, signalR.HttpTransportType.WebSockets)
       .withAutomaticReconnect()
       .build();
 
@@ -63,7 +63,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(`${theme.palette.primary[theme.palette.type]}`)
     return (
       <ThemeProvider theme={theme}>
         <LoadingOverlay

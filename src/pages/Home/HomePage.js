@@ -72,6 +72,7 @@ class Home extends Component {
     // Login
     this.props.connection.invoke("Login", this.state.usernameInputText)
       .then(user => {
+        this.setState({ submitAuthenticationFormError: false })
         this.props.setIsLoggingIn(false);
         console.info(`Logged in as user ${user}`);
         this.props.setIsLoggedIn(true);
