@@ -13,13 +13,11 @@ const ProtectedRouteComponent = (props) => {
     }
   }
 
-  const {component, ...other} = props;
+  const { component, ...other } = props;
 
   return (
     <Route {...other}>
-      {
-        renderPageOrRedirect()
-      }
+      {renderPageOrRedirect()}
     </Route>
   )
 }

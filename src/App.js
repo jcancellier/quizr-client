@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setHubConnection } from './redux/actions/ServerActions';
-import { quizrHubProductionUrl, quizrHubDevelopmentMacUrl } from './api/hub';
+import { quizrHubUrl } from './api/hub';
 import * as signalR from '@microsoft/signalr';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
@@ -30,7 +30,7 @@ class App extends Component {
     this.setIsHubConnectionLoading(true);
 
     let connection = new signalR.HubConnectionBuilder()
-      .withUrl(quizrHubProductionUrl, signalR.HttpTransportType.WebSockets)
+      .withUrl(quizrHubUrl, signalR.HttpTransportType.WebSockets)
       .withAutomaticReconnect()
       .build();
 
@@ -43,7 +43,6 @@ class App extends Component {
         this.setIsHubConnectionLoading(false);
       })
       .catch((err) => {
-        alert(err);
         this.setIsHubConnectionLoading(false);
         this.setState({ errorLoadingHubConnection: true });
       })
@@ -51,13 +50,15 @@ class App extends Component {
 
   determineLoadingOverlayText = () => {
     if (this.state.errorLoadingHubConnection) {
-      return "Error connecting to server. Please refresh page to try again!"
+      return "Error contacting server. Please refresh page to try again!"
     }
     else if (this.state.isHubConnectionLoading) {
       return ""
     }
     else if (this.props.isLoggingIn)
       return "Logging in"
+    else if (this.props.isAddingUserToQuizRoom)
+      return "Joining Quiz"
     else
       return ""
   }
@@ -66,7 +67,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <LoadingOverlay
-          active={this.state.isHubConnectionLoading || this.props.isLoggingIn || this.state.errorLoadingHubConnection}
+          active={this.state.isHubConnectionLoading || this.props.isLoggingIn || this.state.errorLoadingHubConnection || this.props.isAddingUserToQuizRoom}
           spinner={!this.state.errorLoadingHubConnection}
           fadeSpeed={0}
           text={this.determineLoadingOverlayText()}
@@ -80,6 +81,10 @@ class App extends Component {
             content: (base) => ({
               ...base,
               fontFamily: theme.typography.fontFamily
+            }),
+            overlay: (base) => ({
+              ...base,
+              zIndex: 2000
             })
           }}
         >
@@ -95,7 +100,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggingIn: state.auth.isLoggingIn
+    isLoggingIn: state.auth.isLoggingIn,
+    isAddingUserToQuizRoom: state.quizRoom.isAddingUserToQuizRoom
   }
 }
 
