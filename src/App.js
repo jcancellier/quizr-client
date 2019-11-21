@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setHubConnection } from './redux/actions/ServerActions';
+import { setQuizRoomTime } from './redux/actions/QuizRoomActions';
 import { quizrHubUrl } from './api/hub';
 import * as signalR from '@microsoft/signalr';
 import { ThemeProvider } from '@material-ui/styles';
@@ -45,6 +46,10 @@ class App extends Component {
       .catch((err) => {
         this.setIsHubConnectionLoading(false);
         this.setState({ errorLoadingHubConnection: true });
+      })
+
+      connection.on('UpdateRoomTimer', (time) => {
+        this.props.setQuizRoomTime(time);
       })
   }
 
@@ -106,5 +111,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  setHubConnection
+  setHubConnection,
+  setQuizRoomTime
 })(App);
