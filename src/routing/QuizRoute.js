@@ -3,8 +3,8 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { QuizLobbyPage } from '../pages';
 import { joinquizRoutePath } from '.';
-
-let quizPhase = 'lobby';
+import { PrequestionPage } from '../pages/Prequestion/PrequestionPage';
+import { QuestionPage } from '../pages/Question/QuestionPage';
 
 const QuizRouteComponent = (props) => {
 
@@ -15,9 +15,13 @@ const QuizRouteComponent = (props) => {
     if (!props.quizRoom) {
       return <Redirect to={joinquizRoutePath} />
     }
-    switch (quizPhase) {
+    switch (props.quizPhase) {
       case 'lobby':
         return <QuizLobbyPage />
+      case 'prequestion':
+        return <PrequestionPage />
+      case 'question':
+        return <QuestionPage />
       default:
         return <Redirect to="/" />
     }
@@ -35,7 +39,8 @@ const QuizRouteComponent = (props) => {
 const mapStateStateToProps = (state) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    quizRoom: state.quizRoom.quizRoom
+    quizRoom: state.quizRoom.quizRoom,
+    quizPhase: state.quizRoom.quizPhase
   }
 }
 

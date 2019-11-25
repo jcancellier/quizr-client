@@ -1,4 +1,4 @@
-import { SET_QUIZ_ROOM, SET_IS_ADDING_USER_TO_QUIZ_ROOM, SET_QUIZ_ROOM_TIME } from './types';
+import { SET_QUIZ_ROOM, SET_IS_ADDING_USER_TO_QUIZ_ROOM, SET_QUIZ_ROOM_TIME, SET_QUIZ_ROOM_PHASE, SET_QUIZ_RESULTS } from './types';
 
 export const setQuizRoom = (quizRoom) => {
   return {
@@ -18,5 +18,19 @@ export const setQuizRoomTime = (time) => {
   return {
     type: SET_QUIZ_ROOM_TIME,
     payload: time
+  }
+}
+
+export const setQuizRoomPhase = (phase) => {
+  return {
+    type: SET_QUIZ_ROOM_PHASE,
+    payload: phase
+  }
+}
+
+export const setQuizResults = (results) => {
+  return {
+    type: SET_QUIZ_RESULTS,
+    payload: results
   }
 }
