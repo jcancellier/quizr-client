@@ -5,9 +5,9 @@ import { QuizLobbyPage } from '../pages';
 import { joinquizRoutePath } from '.';
 import { PrequestionPage } from '../pages/Prequestion/PrequestionPage';
 import { QuestionPage } from '../pages/Question/QuestionPage';
+import { PostQuestionPage } from '../pages/PostQuestion/PostQuestionPage';
 
 const QuizRouteComponent = (props) => {
-
   const renderQuizPhaseOrRedirect = () => {
     if (!props.isLoggedIn) {
       return <Redirect to="/" />
@@ -22,6 +22,8 @@ const QuizRouteComponent = (props) => {
         return <PrequestionPage />
       case 'question':
         return <QuestionPage />
+      case 'postquestion':
+        return <PostQuestionPage />
       default:
         return <Redirect to="/" />
     }
