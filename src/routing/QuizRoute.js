@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { QuizLobbyPage } from '../pages';
-import { joinquizRoutePath } from '.';
+import { joinquizRoutePath, quizResultsPath } from '.';
 import { PrequestionPage } from '../pages/Prequestion/PrequestionPage';
 import { QuestionPage } from '../pages/Question/QuestionPage';
 import { PostQuestionPage } from '../pages/PostQuestion/PostQuestionPage';
@@ -24,6 +24,8 @@ const QuizRouteComponent = (props) => {
         return <QuestionPage />
       case 'postquestion':
         return <PostQuestionPage />
+      case 'finished':
+        return <Redirect to={quizResultsPath} />
       default:
         return <Redirect to="/" />
     }
