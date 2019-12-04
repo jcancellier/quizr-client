@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setHubConnection } from './redux/actions/ServerActions';
-import { setQuizRoomTime } from './redux/actions/QuizRoomActions';
+import { setQuizRoomTime, setQuizRoomPhase } from './redux/actions/QuizRoomActions';
 import { quizrHubUrl } from './api/hub';
 import * as signalR from '@microsoft/signalr';
 import { ThemeProvider } from '@material-ui/styles';
@@ -50,6 +50,10 @@ class App extends Component {
 
       connection.on('UpdateRoomTimer', (time) => {
         this.props.setQuizRoomTime(time);
+      })
+
+      connection.on('UpdateRoomPhase', (phase) => {
+        this.props.setQuizRoomPhase(phase);
       })
   }
 
@@ -112,5 +116,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   setHubConnection,
-  setQuizRoomTime
+  setQuizRoomTime,
+  setQuizRoomPhase
 })(App);
