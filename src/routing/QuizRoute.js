@@ -44,7 +44,8 @@ const mapStateStateToProps = (state) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
     quizRoom: state.quizRoom.quizRoom,
-    quizPhase: state.quizRoom.quizPhase
+    quizPhase: state.quizRoom.quizPhase,
+    quizResults: state.quizRoom.results
   }
 }
 

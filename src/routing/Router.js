@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomePage, JoinQuizPage } from '../pages';
+import { HomePage, JoinQuizPage, QuizLobbyPage } from '../pages';
 import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import { ProtectedRoute, joinquizRoutePath, QuizRoute, QuizResultsRoute, quizRoutePath, quizResultsPath } from '.';
 import { ResultsPage } from '../pages/Results/ResultsPage';

@@ -16,10 +16,10 @@ class QuestionPageComponent extends Component {
         </Header>
         <Content>
           <div style={{display: 'flex', flex: 1, justifyContent: 'flex-start', flexdirection: 'column'}}>
-            <Timer time={0} />
+            <Timer time={this.props.roomTime} />
           </div>
           <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end', flexdirection: 'column'}}>
-            <UsersOnline usersCount={10}/>
+            <UsersOnline usersCount={this.props.quizRoomUsersOnline}/>
           </div>
         </Content>
 
@@ -70,7 +70,9 @@ class QuestionPageComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    questionTime: state.quizRoom.roomTime
+    questionTime: state.quizRoom.roomTime,
+    quizRoomUsersOnline: state.quizRoom.usersOnline,
+    roomTime: state.quizRoom.roomTime
   }
 }
 

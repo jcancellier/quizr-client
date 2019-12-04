@@ -22,7 +22,7 @@ class QuizLobby extends Component {
         <Footer flexDirection={'column'}>
           <Content/>
           <Content>
-            <Typography variant={'h6'}>Online Users: {63}</Typography>
+            <Typography variant={'h6'}>Online Users: {this.props.quizRoomUsersOnline}</Typography>
           </Content>
         </Footer>
       </QuizLobbyContainer>
@@ -32,7 +32,8 @@ class QuizLobby extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    roomTime: state.quizRoom.roomTime
+    roomTime: state.quizRoom.roomTime,
+    quizRoomUsersOnline: state.quizRoom.usersOnline
   }
 }
 
