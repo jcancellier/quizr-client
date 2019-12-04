@@ -11,7 +11,7 @@ class QuestionPageComponent extends Component {
       <QuestionPageContainer>
         <Header>
           <Typography variant="h4" style={{ fontSize: 'calc(10px + 2.5vw)' }}>
-            Who is the current president of CSUB?
+            {this.props.currentQuestion.text}
           </Typography>
         </Header>
         <Content>
@@ -31,7 +31,7 @@ class QuestionPageComponent extends Component {
                   A
                 </AnswerHeader>
                 <AnswerText>
-                  Lynnette Zelezny
+                  {this.props.currentQuestion.answers[0]}
                 </AnswerText>
               </Answer>
               <Answer>
@@ -39,7 +39,7 @@ class QuestionPageComponent extends Component {
                   B
                 </AnswerHeader>
                 <AnswerText>
-                  Truett S. Cathy
+                {this.props.currentQuestion.answers[1]}
                 </AnswerText>
               </Answer>
             </AnswersRow>
@@ -49,7 +49,7 @@ class QuestionPageComponent extends Component {
                   C
                 </AnswerHeader>
                 <AnswerText>
-                  Horace Mitchell
+                {this.props.currentQuestion.answers[2]}
                 </AnswerText>
               </Answer>
               <Answer>
@@ -57,7 +57,7 @@ class QuestionPageComponent extends Component {
                   D
                 </AnswerHeader>
                 <AnswerText>
-                  Vernon B. Harper Jr.
+                {this.props.currentQuestion.answers[3]}
                 </AnswerText>
               </Answer>
             </AnswersRow>
@@ -72,7 +72,8 @@ const mapStateToProps = (state) => {
   return {
     questionTime: state.quizRoom.roomTime,
     quizRoomUsersOnline: state.quizRoom.usersOnline,
-    roomTime: state.quizRoom.roomTime
+    roomTime: state.quizRoom.roomTime,
+    currentQuestion: state.quizRoom.currentQuestion
   }
 }
 

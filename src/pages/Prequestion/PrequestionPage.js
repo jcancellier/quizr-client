@@ -16,13 +16,13 @@ class PrequestionPageComponent extends Component {
           Question 1 of 5
           </Typography>
           <Typography variant="h4" style={{ fontSize: 'calc(10px + 2vw)' }}>
-          Who is the current president of CSUB?          
+          {this.props.currentQuestion.text}      
           </Typography>
         </Header>
 
         <Content>
           <div style={{display: 'flex', flex: 1, justifyContent: 'flex-start', flexdirection: 'column'}}>
-            <Timer time={0} />
+            <Timer time={this.props.questionTime} />
           </div>
         </Content>
           
@@ -33,6 +33,13 @@ class PrequestionPageComponent extends Component {
   }
 }
 
-const PrequestionPage = connect()(PrequestionPageComponent);
+const mapStateToProps = (state) => {
+  return {
+    questionTime: state.quizRoom.roomTime,
+    currentQuestion: state.quizRoom.currentQuestion
+  }
+}
+
+const PrequestionPage = connect(mapStateToProps)(PrequestionPageComponent);
 
 export { PrequestionPage };

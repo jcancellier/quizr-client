@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setHubConnection } from './redux/actions/ServerActions';
-import { setQuizRoomTime, setQuizRoomPhase, setQuizRoomUsersOnline, setQuizResults, setQuizRoom } from './redux/actions/QuizRoomActions';
+import { setQuizRoomTime, setQuizRoomPhase, setQuizRoomUsersOnline, setQuizResults, setQuizRoom, setCurrentQuestion } from './redux/actions/QuizRoomActions';
 import { quizrHubUrl } from './api/hub';
 import * as signalR from '@microsoft/signalr';
 import { ThemeProvider } from '@material-ui/styles';
@@ -63,6 +63,10 @@ class App extends Component {
       connection.on('ReceiveQuizResults', (quizResults) => {
         this.props.setQuizResults(quizResults);
         this.props.setQuizRoom(null);
+      })
+
+      connection.on('ReceiveNewQuestion', (question) => {
+        this.props.setCurrentQuestion(question);
       })
   }
 
@@ -129,5 +133,6 @@ export default connect(mapStateToProps, {
   setQuizRoomPhase,
   setQuizRoomUsersOnline,
   setQuizResults,
-  setQuizRoom
+  setQuizRoom,
+  setCurrentQuestion
 })(App);

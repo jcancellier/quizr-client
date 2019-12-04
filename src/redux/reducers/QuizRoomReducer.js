@@ -1,4 +1,4 @@
-import { SET_QUIZ_ROOM, SET_IS_ADDING_USER_TO_QUIZ_ROOM, SET_QUIZ_ROOM_TIME, SET_QUIZ_ROOM_PHASE, SET_QUIZ_RESULTS, SET_QUIZ_ROOM_USERS_ONLINE } from "../actions/types";
+import { SET_QUIZ_ROOM, SET_IS_ADDING_USER_TO_QUIZ_ROOM, SET_QUIZ_ROOM_TIME, SET_QUIZ_ROOM_PHASE, SET_QUIZ_RESULTS, SET_QUIZ_ROOM_USERS_ONLINE, SET_CURRENT_QUESTION } from "../actions/types";
 
 const INITIAL_STATE = {
   isAddingUserToQuizRoom: false,
@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   roomTime: 0,
   quizPhase: 'lobby',
   results: null,
-  usersOnline: 0
+  usersOnline: 0,
+  currentQuestion: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -23,6 +24,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, results: action.payload }
     case SET_QUIZ_ROOM_USERS_ONLINE:
       return { ...state, usersOnline: action.payload }
+    case SET_CURRENT_QUESTION:
+      return { ...state, currentQuestion: action.payload}
     default:
       return state;
   }
