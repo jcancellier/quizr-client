@@ -10,10 +10,9 @@ class PrequestionPageComponent extends Component {
   render() {
     return (
       <PrequestionPageContainer>
-        <AppHeader buttons={false} />
         <Header>
           <Typography variant="h4" style={{ fontSize: 'calc(10px + .8vw)' }}>
-          Question 1 of 5
+            Question {this.props.currentQuestion.currentQuestionIndex} of {this.props.currentQuestion.questionCount}
           </Typography>
           <Typography variant="h4" style={{ fontSize: 'calc(10px + 2vw)' }}>
           {this.props.currentQuestion.text}      

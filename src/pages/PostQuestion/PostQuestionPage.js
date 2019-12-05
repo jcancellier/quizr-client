@@ -43,7 +43,6 @@ class PostQuestionPageComponent extends Component {
   render() {
     return (
       <PostQuestionPageContainer>
-        <AppHeader buttons={false} />
         <Header>
           {
             this.determineCorrectOrIncorrect()
