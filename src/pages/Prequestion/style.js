@@ -13,6 +13,7 @@ export const Header = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  width: 100vw;
   padding: 15rem;
 `;
 
