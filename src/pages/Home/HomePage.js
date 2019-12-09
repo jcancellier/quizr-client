@@ -89,7 +89,7 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <AppHeader />
+        <AppHeader buttons={false}/>
         {/* <LinearProgress/> */}
         <HomePageContainer>
           <Header>
