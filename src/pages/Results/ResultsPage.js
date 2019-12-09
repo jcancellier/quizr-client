@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import { ResultsPageContainer, Header, Content, Footer, ResultCardsContainer } from './style';
 import { Typography, Button } from '@material-ui/core';
 import ResultCard from './components/ResultCard';
@@ -67,6 +68,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const ResultsPage = connect(mapStateToProps)(Results);
+const ResultsPageComponent= connect(mapStateToProps)(Results);
+const ResultsPage = withRouter(ResultsPageComponent);
 
 export { ResultsPage };
