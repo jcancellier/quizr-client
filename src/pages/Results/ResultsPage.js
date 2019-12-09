@@ -13,21 +13,21 @@ class Results extends Component {
       case 3:
         return (
           <React.Fragment>
-            <ResultCard place="1st" userName={topThreeUsers[0].name} score={topThreeUsers[0].name} />
-            <ResultCard place="2nd" userName={topThreeUsers[1].name} score={topThreeUsers[1].name} />
-            <ResultCard place="3rd" userName={topThreeUsers[2].name} score={topThreeUsers[2].name} />
+            <ResultCard place="1st" userName={topThreeUsers[0].name} score={topThreeUsers[0].score} />
+            <ResultCard place="2nd" userName={topThreeUsers[1].name} score={topThreeUsers[1].score} />
+            <ResultCard place="3rd" userName={topThreeUsers[2].name} score={topThreeUsers[2].score} />
           </React.Fragment>
         )
       case 2:
         return (
           <React.Fragment>
-            <ResultCard place="1st" userName={topThreeUsers[0].name} score={topThreeUsers[0].name} />
-            <ResultCard place="2nd" userName={topThreeUsers[1].name} score={topThreeUsers[1].name} />
+            <ResultCard place="1st" userName={topThreeUsers[0].name} score={topThreeUsers[0].score} />
+            <ResultCard place="2nd" userName={topThreeUsers[1].name} score={topThreeUsers[1].score} />
           </React.Fragment>
         )
       case 1:
         return (
-          <ResultCard place="1st" userName={topThreeUsers[0].name} score={topThreeUsers[0].name} />
+          <ResultCard place="1st" userName={topThreeUsers[0].name} score={topThreeUsers[0].score} />
         )
     }
   }
