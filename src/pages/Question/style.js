@@ -24,6 +24,7 @@ export const Content = styled.div`
   padding: 2rem;
   align-items: ${props => props.alignItems ? props.alignItems : 'center'};
   justify-content: ${props => props.justifyContent ? props.justifyContent : 'center'};
+  flex-direction: ${props => props.flexDirection ? props.flexDirection : 'row'}
 `;
 
 export const Footer = styled.div`

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { AppHeader } from '../../global/components';
 import { connect } from 'react-redux';
 import { Content, Header, PrequestionPageContainer, Footer } from './style';
 import { Typography } from '@material-ui/core';

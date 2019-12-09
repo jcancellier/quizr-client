@@ -8,7 +8,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 import theme from './global/styles/theme';
 import styled from 'styled-components';
-import { Router } from './routing';
+import { Router, quizResultsPath } from './routing';
 import LoadingOverlay from 'react-loading-overlay';
 
 const AppContainer = styled.div`
@@ -53,7 +53,7 @@ class App extends Component {
       });
 
       connection.on('UpdateRoomPhase', (phase) => {
-        this.props.setQuizRoomPhase(phase);
+          this.props.setQuizRoomPhase(phase);
       });
 
       connection.on('UpdateQuizRoomUsers', (userCount) => {
@@ -63,6 +63,7 @@ class App extends Component {
       connection.on('ReceiveQuizResults', (quizResults) => {
         this.props.setQuizResults(quizResults);
         this.props.setQuizRoom(null);
+        this.props.setQuizRoomPhase('lobby');
       })
 
       connection.on('ReceiveNewQuestion', (question) => {

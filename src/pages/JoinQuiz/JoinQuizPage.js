@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setQuizRoom, setIsAddingUserToQuizRoom } from '../../redux/actions/QuizRoomActions';
+import { setQuizRoom, setIsAddingUserToQuizRoom, setQuizResults } from '../../redux/actions/QuizRoomActions';
 import { AppHeader } from '../../global/components';
 import { JoinQuizContainer, Header, Content, Footer, Divider, JoinQuizForm } from './style';
 import { Typography, TextField, Button } from '@material-ui/core';
@@ -43,6 +43,7 @@ class JoinQuiz extends Component {
         this.props.setQuizRoom(room)
         this.setState({ submitJoinQuizFormError: false }, () => {
           this.props.history.push(quizRoutePath);
+          this.props.setQuizResults(null);
         })
       })
       .catch((err) => {
@@ -135,7 +136,8 @@ const mapStateToProps = (state) => {
 const JoinQuizPage = withRouter(
   connect(mapStateToProps, {
     setQuizRoom,
-    setIsAddingUserToQuizRoom
+    setIsAddingUserToQuizRoom,
+    setQuizResults
   })(JoinQuiz)
 )
 
