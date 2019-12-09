@@ -45,7 +45,7 @@ class Results extends Component {
           </Content>
         </Header>
         <ResultCardsContainer>
-          {/* {this._renderResultCards()} */}
+          {this._renderResultCards()}
         </ResultCardsContainer>
         <Footer>
           <Button         
